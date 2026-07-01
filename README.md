@@ -72,3 +72,4 @@ Make sure that you don't have any other Dolphin instances running or Libmelee wo
 - [SmashBot](https://github.com/altf4/smashbot)
 - [Nintendorks Move list and guide](https://gamefaqs.gamespot.com/gamecube/516492-super-smash-bros-melee/faqs/15362)
 - [IGN Super Smash Bros Melee Character Guide](https://www.ign.com/wikis/super-smash-bros-melee/Characters)
+- [A Beginners Guide to Super Smash Bros Melee](https://medium.com/@clupica7/a-beginners-guide-to-super-smash-bros-melee-8e5e272bd257)

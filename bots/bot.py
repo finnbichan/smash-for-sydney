@@ -5,7 +5,7 @@ class Bot(object):
 
     def __init__(self, character=None):
         if not character:
-            character = melee.Character.JIGGLYPUFF
+            character = melee.Character.MARIO
         self.character = character
         self.console = None
         self.port = None
