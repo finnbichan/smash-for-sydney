@@ -23,7 +23,7 @@ I am proposing a workshop based around a similar concept where we can:
 
 ## Prerequisits
 
-Download the Slippi Client that includes the Dolphin Nintendo 64 emulator from https://slippi.gg/ This is available for Windows, Mac and Linux. When installing you can skip registration as we are not going to be playing this online (and the bot library explicitly states not to do this).
+Download the Slippi Client that includes the Dolphin Nintendo Gamecube emulator from https://slippi.gg/ This is available for Windows, Mac and Linux. When installing you can skip registration as we are not going to be playing this online (and the bot library explicitly states not to do this).
 
 You will also need the Super Smash Bros. Melee ISO file, which is available for download from https://drive.google.com/file/d/1H9QNNFmVpZLys_kMJq44dpkv7EKBQqHZ/view
 
@@ -45,6 +45,16 @@ After cloning this repository run:
 
 To battle the listed bots. Dolphin should load, pick the players, and start fighting automatically.
 
+## Building your bot
+
+To build your bot, I would recommend making a copy of `bots/example.py`. This uses the example from the Libmelee quickstart video. It is very basic, but gives you an idea of what can be done.
+
+The only method that you need to implement is `fight()` which gets run once per frame for each player. This does not give you a lot of time for computation - so things like calling an LLM won't be possible - but you can access the game state and send commands to the game controller.
+
+Information about all the API methods available to you can be found in the [Libmelee Docs](https://libmelee.readthedocs.io/en/latest/index.html).
+
+For general information about playing Super Smash Bros. Melee and specific information about character specific moves I would recommend starting with the [Nintendorks Move list and guide](https://gamefaqs.gamespot.com/gamecube/516492-super-smash-bros-melee/faqs/15362).
+
 ## Troubleshooting
 
 ### Dolphin loads but does not do anything!
@@ -60,3 +70,4 @@ Make sure that you don't have any other Dolphin instances running or Libmelee wo
 - [Libmelee Programming Quickstart](https://www.youtube.com/watch?v=1R723AS1P-0)
 - [Libmelee Docs](https://libmelee.readthedocs.io/en/latest/index.html)
 - [SmashBot](https://github.com/altf4/smashbot)
+- [Nintendorks Move list and guide](https://gamefaqs.gamespot.com/gamecube/516492-super-smash-bros-melee/faqs/15362)
