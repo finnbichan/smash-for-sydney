@@ -1,3 +1,4 @@
+import sys
 import signal
 import melee
 import logging
@@ -13,6 +14,14 @@ def fight(stage, players):
     for player in players:
         player.create_controller(console, port)
         port += 1
+
+    def signal_handler(sig, frame):
+        for player in players:
+            player.controller.disconnect()
+        console.stop()
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, signal_handler)
 
     console.run(iso_path=iso)
 
