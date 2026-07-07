@@ -59,7 +59,7 @@ For general information about playing Super Smash Bros. Melee and specific infor
 
 ### Dolphin loads but does not do anything!
 
-Make sure that you don't have any other Dolphin instances running or Libmelee won't be able to connect to it.
+Make sure that you don't have any other Dolphin instances running or Libmelee won't be able to connect to it. The signal handler in the code should shut down Dolphin cleanly if you use Ctrl+C to quit the script.
 
 ## References
 
@@ -73,3 +73,4 @@ Make sure that you don't have any other Dolphin instances running or Libmelee wo
 - [Nintendorks Move list and guide](https://gamefaqs.gamespot.com/gamecube/516492-super-smash-bros-melee/faqs/15362)
 - [IGN Super Smash Bros Melee Character Guide](https://www.ign.com/wikis/super-smash-bros-melee/Characters)
 - [A Beginners Guide to Super Smash Bros Melee](https://medium.com/@clupica7/a-beginners-guide-to-super-smash-bros-melee-8e5e272bd257)
+- [Strategywiki Super_Smash_Bros._Melee Controls](https://strategywiki.org/wiki/Super_Smash_Bros._Melee/Controls)
