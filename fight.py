@@ -1,12 +1,21 @@
+import os
 import sys
 import signal
 import melee
 import logging
 
-slippi_path = "C:/Users/sibun/AppData/Roaming/Slippi Launcher/netplay/"
-iso = "C:/Users/sibun/Documents/Games/Gamecube/Super Smash Bros. Melee (USA) (En,Ja) (Rev 2).nkit.iso"
+slippi_path = os.getenv("SLIPPI_PATH", None)
+iso = os.getenv("SMASH_ISO_PATH", None)
 
 def fight(stage, players):
+
+    if not slippi_path:
+        logging.error("SLIPPI_PATH env var not defined")
+        raise RuntimeError
+
+    if not iso:
+        logging.error("SMASH_ISO_PATH env var not defined")
+        raise RuntimeError
 
     console = melee.Console(path=slippi_path, fullscreen=True)
 
