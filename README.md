@@ -21,6 +21,32 @@ I am proposing a workshop based around a similar concept where we can:
 - Add new features
 - Build a simpler bot builder
 
+## Quick setup (macOS / Linux / Windows)
+
+Automated setup scripts install Python, the Slippi Dolphin emulator, the
+libmelee Python library, and a virtualenv, and write a local environment file.
+
+| OS | Script | Run |
+|---|---|---|
+| macOS | `setup-macos.sh` | `bash setup-macos.sh` |
+| Linux | `setup-linux.sh` | `bash setup-linux.sh` |
+| Windows | `setup-windows.bat` | double-click, or run `setup-windows.bat` |
+| Windows (PowerShell) | `setup-windows.ps1` | `powershell -ExecutionPolicy Bypass -File .\setup-windows.ps1` |
+
+- macOS / Linux run `source env.sh ...`.
+- Windows CMD uses `env.cmd` (`call env.cmd`), Windows PowerShell uses `env.ps1` (`. .\env.ps1`).
+
+Each script is idempotent (safe to re-run) and prints the one manual step
+you still have to do: download the Super Smash Bros. Melee ISO. After that:
+
+- macOS / Linux: `source env.sh && .venv/bin/python arena.py`
+- Windows (CMD): `call env.cmd && .venv\Scripts\python.exe arena.py`
+- Windows (PowerShell): `. .\env.ps1 ; .\.venv\Scripts\python.exe arena.py`
+
+## Manual setup
+
+If you'd rather set things up by hand:
+
 ## Prerequisits
 
 Download the Slippi Client that includes the Dolphin Nintendo Gamecube emulator from https://slippi.gg/ This is available for Windows, Mac and Linux. When installing you can skip registration as we are not going to be playing this online (and the bot library explicitly states not to do this).
