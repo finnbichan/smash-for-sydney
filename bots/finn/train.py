@@ -31,7 +31,9 @@ from gymnasium import spaces
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import CheckpointCallback
 
-from bots.finn.bot import RLBot
+from bots.linyu import LinyuPikachu
+from bots.masher import Masher
+from bots.smashbot import SmashBot
 from fight import resolve_iso_path, resolve_slippi_path
 from bots.finn.actions import (
     ACTIONS,
@@ -60,7 +62,7 @@ class TrainingEnv(gym.Env):
 
         self.stage = stage
         self.agent_character = AGENT_CHARACTER
-        self.opponent_bot = RLBot(melee.Character.MARTH, checkpoint_path="checkpoints/model_final.zip")
+        self.opponent_bot = opponent_bot or LinyuPikachu(melee.Character.KIRBY)
 
         self.action_space = spaces.Discrete(N_ACTIONS)
         self.observation_space = spaces.Box(low=-1e4, high=1e4, shape=(OBS_SIZE,), dtype=np.float32)
@@ -68,7 +70,7 @@ class TrainingEnv(gym.Env):
         self.agent_port = 1
         self.opponent_port = 2
 
-        self.console = melee.Console(path=slippi_path, fullscreen=False)
+        self.console = melee.Console(path=slippi_path, fullscreen=False, emulation_speed=0.0)
         self.controller = melee.Controller(console=self.console, port=self.agent_port)
         self.opponent_bot.create_controller(self.console, self.opponent_port)
 
