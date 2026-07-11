@@ -33,7 +33,6 @@ from stable_baselines3.common.callbacks import CheckpointCallback
 
 from bots.linyu import LinyuPikachu
 from bots.masher import Masher
-from bots.smashbot import SmashBot
 from fight import resolve_iso_path, resolve_slippi_path
 from bots.finn.actions import (
     ACTIONS,
