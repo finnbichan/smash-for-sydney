@@ -2,13 +2,63 @@ import sys
 import signal
 import melee
 import logging
+import os
+from pathlib import Path
 
-slippi_path = "C:/Users/sibun/AppData/Roaming/Slippi Launcher/netplay/"
-iso = "C:/Users/sibun/Documents/Games/Gamecube/Super Smash Bros. Melee (USA) (En,Ja) (Rev 2).nkit.iso"
+PREREQS_DIR = Path("./prereqs")
+SLIPPI_LAUNCHER_DIR = Path.home() / ".config" / "Slippi Launcher"
+DOLPHIN_EXECUTABLES = (
+    "Slippi_Online-x86_64.AppImage",
+    "Slippi_Netplay_Mainline-x86_64.AppImage",
+)
+ISO = PREREQS_DIR / "Super Smash Bros. Melee (USA) (En,Ja) (Rev 2)" / "Super Smash Bros. Melee (USA) (En,Ja) (Rev 2).nkit.iso"
+
+
+def resolve_slippi_path():
+    configured_path = os.environ.get("SMASH_SLIPPI_PATH")
+    if configured_path:
+        return configured_path
+
+    candidates = []
+    for executable in DOLPHIN_EXECUTABLES:
+        candidates.append(PREREQS_DIR / executable)
+
+    candidates.extend(
+        (
+            SLIPPI_LAUNCHER_DIR / "netplay-beta",
+            SLIPPI_LAUNCHER_DIR / "netplay",
+        )
+    )
+
+    for path in candidates:
+        if path.is_file() or path.is_dir():
+            return str(path)
+
+    raise FileNotFoundError(
+        "Could not find Slippi Dolphin. Install Slippi through the launcher so "
+        f"{SLIPPI_LAUNCHER_DIR / 'netplay'} or {SLIPPI_LAUNCHER_DIR / 'netplay-beta'} exists, "
+        f"or copy one of these files into {PREREQS_DIR}: {', '.join(DOLPHIN_EXECUTABLES)}. "
+        "The Slippi Launcher AppImage is only the installer/launcher, not the Dolphin "
+        "executable libmelee needs. You can also set SMASH_SLIPPI_PATH to the Dolphin "
+        "executable or install directory."
+    )
+
+
+def resolve_iso_path():
+    configured_path = os.environ.get("SMASH_ISO_PATH")
+    path = Path(configured_path) if configured_path else ISO
+
+    if path.is_file():
+        return str(path)
+
+    raise FileNotFoundError(
+        f"Could not find the Melee ISO at {path}. Set SMASH_ISO_PATH to the ISO file "
+        f"or place it at {ISO}."
+    )
 
 def fight(stage, players):
 
-    console = melee.Console(path=slippi_path, fullscreen=True)
+    console = melee.Console(path=resolve_slippi_path(), fullscreen=True)
 
     port = 1
     for player in players:
@@ -23,7 +73,7 @@ def fight(stage, players):
 
     signal.signal(signal.SIGINT, signal_handler)
 
-    console.run(iso_path=iso)
+    console.run(iso_path=resolve_iso_path())
 
     logging.info("Connecting to console...")
     if not console.connect():
